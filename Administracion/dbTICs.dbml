@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Tesis" Class="dbTICsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Tesis.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="TesisConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Procesos" Member="Procesos">
+    <Type Name="Procesos">
+      <Column Name="IdProceso" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NombreProceso" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Proceso" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Reglamentacion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MallaCurricular_Procesos" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RecorridoVirtual" Member="RecorridoVirtual">
+    <Type Name="RecorridoVirtual">
+      <Column Name="IdRecorrido" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NombreLaboratorio" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Laboratorio" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Administradores" Member="Administradores">
+    <Type Name="Administradores">
+      <Column Name="IdAdmin" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cargo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Contraseña" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Unidades" Member="Unidades">
+    <Type Name="Unidades">
+      <Column Name="IdUnidades" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NombreUnidad" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Horas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Unidades_Asignaturas" Member="Asignaturas" ThisKey="IdUnidades" OtherKey="IdUnidad" Type="Asignaturas" />
+      <Association Name="MallaCurricular_Unidades" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CamposFormacion" Member="CamposFormacion">
+    <Type Name="CamposFormacion">
+      <Column Name="IdCampo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SiglasCampo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NombreCampo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Horas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Color" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="CamposFormacion_Asignaturas" Member="Asignaturas" ThisKey="IdCampo" OtherKey="IdCampo" Type="Asignaturas" />
+      <Association Name="MallaCurricular_CamposFormacion" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ObjetivosAprendizaje" Member="ObjetivosAprendizaje">
+    <Type Name="ObjetivosAprendizaje">
+      <Column Name="IdObjetivo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NombreObj" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Objetivo" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MallaCurricular_ObjetivosAprendizaje" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MallaCurricular" Member="MallaCurricular">
+    <Type Name="MallaCurricular">
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NombreMalla" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Pensum" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="MallaCurricular_Procesos" Member="Procesos" ThisKey="IdMalla" OtherKey="IdMalla" Type="Procesos" />
+      <Association Name="MallaCurricular_Unidades" Member="Unidades" ThisKey="IdMalla" OtherKey="IdMalla" Type="Unidades" />
+      <Association Name="MallaCurricular_CamposFormacion" Member="CamposFormacion" ThisKey="IdMalla" OtherKey="IdMalla" Type="CamposFormacion" />
+      <Association Name="MallaCurricular_ObjetivosAprendizaje" Member="ObjetivosAprendizaje" ThisKey="IdMalla" OtherKey="IdMalla" Type="ObjetivosAprendizaje" />
+      <Association Name="MallaCurricular_Prerrequisito" Member="Prerrequisito" ThisKey="IdMalla" OtherKey="IdMalla" Type="Prerrequisito" />
+      <Association Name="MallaCurricular_Graduados" Member="Graduados" ThisKey="IdMalla" OtherKey="IdMalla" Type="Graduados" />
+      <Association Name="MallaCurricular_Matriculados" Member="Matriculados" ThisKey="IdMalla" OtherKey="IdMalla" Type="Matriculados" />
+      <Association Name="MallaCurricular_MensajesMaGra" Member="MensajesMaGra" ThisKey="IdMalla" OtherKey="IdMalla" Type="MensajesMaGra" />
+      <Association Name="MallaCurricular_FormSoli" Member="FormSoli" ThisKey="IdMalla" OtherKey="IdMalla" Type="FormSoli" />
+      <Association Name="MallaCurricular_Asignaturas" Member="Asignaturas" ThisKey="IdMalla" OtherKey="IdMalla" Type="Asignaturas" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prerrequisito" Member="Prerrequisito">
+    <Type Name="Prerrequisito">
+      <Column Name="IdPre" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdAsignatura" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Codigo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MallaCurricular_Prerrequisito" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+      <Association Name="Asignaturas_Prerrequisito" Member="Asignaturas" ThisKey="IdAsignatura" OtherKey="IdAsignatura" Type="Asignaturas" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Graduados" Member="Graduados">
+    <Type Name="Graduados">
+      <Column Name="IdGraduados" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Periodo" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="Hombres" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mujeres" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MallaCurricular_Graduados" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Matriculados" Member="Matriculados">
+    <Type Name="Matriculados">
+      <Column Name="IdMatriculados" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Periodo" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="Hombres" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mujeres" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MallaCurricular_Matriculados" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MensajesMaGra" Member="MensajesMaGra">
+    <Type Name="MensajesMaGra">
+      <Column Name="IdMensajes" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Titulo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mensaje" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MallaCurricular_MensajesMaGra" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormSoli" Member="FormSoli">
+    <Type Name="FormSoli">
+      <Column Name="IdFormSoli" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FormSoli" Member="FormSoli1" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="MallaCurricular_FormSoli" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Asignaturas" Member="Asignaturas">
+    <Type Name="Asignaturas">
+      <Column Name="IdAsignatura" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Codigo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CompDocenci" Type="System.Decimal" DbType="Decimal(9,1)" CanBeNull="true" />
+      <Column Name="CompPractico" Type="System.Decimal" DbType="Decimal(9,1)" CanBeNull="true" />
+      <Column Name="ApreAutonomo" Type="System.Decimal" DbType="Decimal(9,1)" CanBeNull="true" />
+      <Column Name="IdCampo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdUnidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pea" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Semestre" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Columna" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Asignaturas_Prerrequisito" Member="Prerrequisito" ThisKey="IdAsignatura" OtherKey="IdAsignatura" Type="Prerrequisito" />
+      <Association Name="CamposFormacion_Asignaturas" Member="CamposFormacion" ThisKey="IdCampo" OtherKey="IdCampo" Type="CamposFormacion" IsForeignKey="true" />
+      <Association Name="MallaCurricular_Asignaturas" Member="MallaCurricular" ThisKey="IdMalla" OtherKey="IdMalla" Type="MallaCurricular" IsForeignKey="true" />
+      <Association Name="Unidades_Asignaturas" Member="Unidades" ThisKey="IdUnidad" OtherKey="IdUnidades" Type="Unidades" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.proalmColumna" Method="proalmColumna">
+    <Parameter Name="idmalla" Type="System.Int32" DbType="Int" />
+    <ElementType Name="proalmColumnaResult">
+      <Column Name="Columna" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.proalmSemestre" Method="proalmSemestre">
+    <Parameter Name="idmalla" Type="System.Int32" DbType="Int" />
+    <ElementType Name="proalmSemestreResult">
+      <Column Name="Semestre" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.palmaTodasAsignaturas" Method="palmaTodasAsignaturas">
+    <Parameter Name="idmalla" Type="System.Int32" DbType="Int" />
+    <Parameter Name="asignatura" Type="System.Int32" DbType="Int" />
+    <ElementType Name="palmaTodasAsignaturasResult">
+      <Column Name="IdAsignatura" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Codigo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CompDocenci" Type="System.Decimal" DbType="Decimal(9,1)" CanBeNull="true" />
+      <Column Name="CompPractico" Type="System.Decimal" DbType="Decimal(9,1)" CanBeNull="true" />
+      <Column Name="ApreAutonomo" Type="System.Decimal" DbType="Decimal(9,1)" CanBeNull="true" />
+      <Column Name="IdCampo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdUnidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pea" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdMalla" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Semestre" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Columna" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
